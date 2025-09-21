@@ -8,4 +8,4 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // })->middleware('auth:sanctum');
 
-Route::apiResource("gift", GiftController::class);
+Route::apiResource("gifts", GiftController::class);

@@ -13,6 +13,15 @@ class GiftController extends Controller
 {
     use ApiResponse;
 
+    public function index() {
+
+        $gifts = Gift::all();
+        if($gifts -> isEmpty())
+            return $this -> apiResponse('success', 'No gifts found', null);
+
+        return $this -> apiResponse('success', 'Gifts fetched successfully', $gifts);
+    }
+
     public function store(Request $request) {
         $fields = $request->validate([
             'user_id' => 'required',

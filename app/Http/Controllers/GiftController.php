@@ -50,7 +50,7 @@ class GiftController extends Controller
         $gift = Gift::find($id);
 
         if(!$gift)
-            return $this->apiResponse('error', 'No gift found', null);
+            return $this->apiResponse('error', 'No gift found', null, 400);
 
         $fields = $request->validate([
             'name' => 'required|min:5|max:15',
@@ -61,5 +61,15 @@ class GiftController extends Controller
         $gift->update($fields);
 
         return $this->apiResponse('success', 'Gift updated successfully', $gift);
+    }
+
+    public function destroy($id) {
+
+        $gift = Gift::find($id);
+        if(!$gift)
+            return $this->apiResponse('error', 'Gift not found', null, 400);
+
+        $gift->delete();
+        return $this->apiResponse('success', 'Gift deleted successfully', null, 200);
     }
 }

@@ -46,5 +46,11 @@ class UserController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
         $user["token"] = $token;
         return $this->apiResponse('success', 'User loged in successfully', $user);
-    }   
+    }  
+    
+    public function logout(Request $request) {
+        $request->user()->tokens()->delete();
+        
+        return $this->apiResponse('success', 'User loged out successfullly', null);
+    }
 }

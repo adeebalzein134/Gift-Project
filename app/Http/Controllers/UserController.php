@@ -30,6 +30,16 @@ class UserController extends Controller
         return $this->apiResponse('success', 'User found', $user);
     }
 
+    public function destroy($id) {
+        $user = User::find($id);
+
+        if(!$user)
+            return $this->apiResponse('error', 'User not found', null);
+        
+        $user->delete();
+        return $this->apiResponse('success', 'User deleted successfully', null);
+    }
+
     public function register(Request $request) {
         
         $validatedFields = $request->validate([

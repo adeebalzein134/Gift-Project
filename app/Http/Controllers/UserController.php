@@ -21,6 +21,15 @@ class UserController extends Controller
         return $this->apiResponse('success', 'Users fetched successfully', $users);
     }
 
+    public function show($id) {
+        $user = User::find($id);
+        if(!$user) {
+            return $this->apiResponse('error', 'No users found', null);
+        }
+
+        return $this->apiResponse('success', 'User found', $user);
+    }
+
     public function register(Request $request) {
         
         $validatedFields = $request->validate([

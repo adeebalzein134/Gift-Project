@@ -12,4 +12,8 @@ class Gift extends Model
         'price',
         'description'
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

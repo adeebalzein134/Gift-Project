@@ -10,6 +10,15 @@ class UserController extends Controller
 {
     use ApiResponse;
 
+    public function index() {
+        $users = User::all();
+
+        if($users->isEmpty())
+            return $this->apiResponse('success', 'No users found', null);
+
+        return $this->apiResponse('success', 'Users fetched successfully', $users);
+    }
+
     public function register(Request $request) {
         
         $validatedFields = $request->validate([

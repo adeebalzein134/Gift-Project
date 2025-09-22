@@ -10,5 +10,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::apiResource("gifts", GiftController::class);
+Route::apiResource("users", UserController::class);
+
 
 Route::post("register", [UserController::class, "register"]);

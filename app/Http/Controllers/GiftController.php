@@ -30,13 +30,12 @@ class GiftController extends Controller implements HasMiddleware
 
     public function store(Request $request) {
         $fields = $request->validate([
-            'user_id' => 'required',
             'name' => 'required|min:5|max:15',
             'price' => 'required|integer|min:500|max:999999',
             'description' => 'nullable|string'
         ]);
 
-        $gift = Gift::create($fields);
+        $gift = $request->user()->gifts()->create($fields);
 
         return $this->apiResponse('success', 'Gift created successfully', $gift); 
     }

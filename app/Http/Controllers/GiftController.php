@@ -6,9 +6,6 @@ use App\Models\Gift;
 use Illuminate\Http\Request;
 use App\Traits\ApiResponse;
 
-
-
-
 class GiftController extends Controller
 {
     use ApiResponse;

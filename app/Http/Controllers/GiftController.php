@@ -5,10 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Gift;
 use Illuminate\Http\Request;
 use App\Traits\ApiResponse;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class GiftController extends Controller
+
+class GiftController extends Controller implements HasMiddleware
 {
     use ApiResponse;
+
+    public static function middleware(): array {
+        return [
+            new Middleware('auth:sanctum', except: ['index', 'show']),
+        ];
+    }
 
     public function index() {
 

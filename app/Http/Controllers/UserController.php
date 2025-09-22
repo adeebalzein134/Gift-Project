@@ -30,6 +30,21 @@ class UserController extends Controller
         return $this->apiResponse('success', 'User found', $user);
     }
 
+    public function update(Request $request, $id) {
+        $user = User::find($id);
+        if(!$user)
+            return $this->apiResponse('error', 'User not found', null);
+
+        $validatedFields = $request->validate([
+            'phone' => 'required|min:9|max:10|unique:users,phone',
+            'password' => 'required|confirmed|string|min:8'
+        ]);
+
+        $user->update($validatedFields);
+
+        return $this->apiResponse('success', 'User updated successfully', $user);
+    }
+
     public function destroy($id) {
         $user = User::find($id);
 
